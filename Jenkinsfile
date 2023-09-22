@@ -11,37 +11,11 @@ pipeline{
      		disableConcurrentBuilds()
     }
 
-    // Determinar si dejar o quitar
-    /*
-    environment {
-        PROJECT_PATH_BACK = 'cliente'
-    }
-    */
-
-    // Determinar si dejar o quitar
-    /*
-    triggers {
-        // @yearly, @annually, @monthly, @weekly, @daily, @midnight, and @hourly o definir un intervalo. Ej: H */4 * * 1-5
-        pollSCM('@weekly') //define un intervalo regular en el que Jenkins debería verificar los cambios de fuente nuevos
-    }
-    */
-
     //Una sección que define las herramientas “preinstaladas” en Jenkins. TODO: Validar que sí sea JDK17_Centos. Validar si es necesario NodeJS.
     tools {
         jdk 'JDK17_Centos'
         nodejs 'NodeJS15'
     }
-
-    // Parámetros disponibles en jenkins. Podrían ser útiles en otra implementación
-     /*
-     parameters{
-            string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-            text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
-            booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
-            choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
-            password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a passwor')
-     }
-     */
 
     stages{
         stage('Checkout') {

@@ -1,124 +1,114 @@
-@Library('ceiba-jenkins-library@master') _
+@Library('ceiba-jenkins-library') _
 pipeline{
-	// any -> tomaria slave 5 u 8
-	// Para mobile se debe especificar el slave -> {label 'Slave_Mac'}
-	// Para proyectos de arus se debe tomar el slave 6 o 7 -> {label 'Slave6'} o {label 'Slave7'}
-    agent any
-
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '5'))
-        disableConcurrentBuilds()
-        gitLabConnection('GitCeiba')
+    //Donde se va a ejecutar el Pipeline
+	agent {
+        label 'Slave_Induccion'
     }
 
+    //Opciones específicas de Pipeline dentro del Pipeline
+    options {
+        	buildDiscarder(logRotator(numToKeepStr: '3'))
+     		disableConcurrentBuilds()
+    }
+
+    // Determinar si dejar o quitar
+    /*
     environment {
         PROJECT_PATH_BACK = 'cliente'
     }
+    */
 
+    // Determinar si dejar o quitar
+    /*
     triggers {
         // @yearly, @annually, @monthly, @weekly, @daily, @midnight, and @hourly o definir un intervalo. Ej: H */4 * * 1-5
         pollSCM('@weekly') //define un intervalo regular en el que Jenkins debería verificar los cambios de fuente nuevos
     }
+    */
 
+    //Una sección que define las herramientas “preinstaladas” en Jenkins. TODO: Validar que sí sea JDK17_Centos. Validar si es necesario NodeJS.
     tools {
-        jdk 'JDK13_Centos'
+        jdk 'JDK17_Centos'
+        nodejs 'NodeJS15'
     }
 
-    // Parametros disponibles en jenkins
-     /*parameters{
+    // Parámetros disponibles en jenkins. Podrían ser útiles en otra implementación
+     /*
+     parameters{
             string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
             text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
             booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
             choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
             password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a passwor')
-     }*/
+     }
+     */
 
     stages{
         stage('Checkout') {
-            steps {
-                echo '------------>Checkout desde Git Microservicio<------------'
-                //Esta opción se usa para el checkout sencillo de un microservicio
-                gitCheckout(
-                    urlProject:'git@git.ceiba.com.co:adn&#x2F;adn-sistema-de-punto-de-venta-de-papeleria-back-juan.gutierrez.git',
-                    branchProject: '${BRANCH_NAME}', 
-                )
-
-                //Esta opción se usa cuando el comun está centralizado para varios microservicios
-                /*gitCheckoutWithComun(
-                    urlProject:'git@git.ceiba.com.co:ceiba_legos/revision-blocks.git',
-                    branchProject: '${BRANCH_NAME}',
-                    urlComun: 'git@git.ceiba.com.co:ceiba_legos/comun.git'
-                )*/
-
-                dir("${PROJECT_PATH_BACK}"){
-                    sh 'chmod +x ./gradlew'
-                    sh './gradlew clean'
-                }
-            }
+          steps{
+            echo "------------>Checkout<------------"
+            checkout scm
+          }
         }
 
-        stage('Compilacion y Test Unitarios'){
-            // El "parallel" es si vamos a correr los test del frontend en paralelo con los test de backend, se configura en otro stage dentro de parallel
-            parallel {
-                stage('Test- Backend'){
-                    steps {
-                        echo '------------>Test Backend<------------'
-                        dir("${PROJECT_PATH_BACK}"){
-                            sh './gradlew --stacktrace test'
-                        }
-                    }
-                    post{
-                        always {
-                            junit '**/build/test-results/test/*.xml' //Configuración de los reportes de JUnit
-                        }
-                    }
-                }
-                /*
-                stage('Test- Frontend'){
-                    steps {
-                        echo '------------>Test Frontend<------------'
-                        dir("${PROJECT_PATH_FRONT}"){
-                            // comando ejecucion test
-                        }
-                    }
-                }
-                */
-            }
+        stage('Clean') {
+          steps{
+             echo "------------>Clean<------------"
+             sh 'chmod +x ./microservicio/gradlew'
+             sh './microservicio/gradlew --b ./microservicio/build.gradle clean'
+          }
         }
-		
-		stage('Static Code Analysis') {
-			steps{
-				sonarqubeMasQualityGates(sonarKey:'com.ceiba.core.bloque', 
-				sonarName:'co.com.ceiba.proyecto:adn-sistema-de-punto-de-venta-de-papeleria-back', 
-				sonarPathProperties:'./sonar-project.properties')
-			}
-		}
 
-        stage('Build'){
-            parallel {
-                stage('construcción Backend'){
-                    steps{
-                        echo "------------>Compilación backend<------------"
-                        dir("${PROJECT_PATH_BACK}"){
-                            sh './gradlew build -x test'
-                        }
-                    }
-                }
-            }
-         }
+        stage('Compile & Unit Tests') {
+          steps{
+            echo "------------>compile & Unit Tests<------------"
+            sh 'chmod +x ./microservicio/gradlew'
+            sh './microservicio/gradlew --b ./microservicio/build.gradle test'
+          }
+        }
+
+        // TODO: Pendiente. Si hay bloqueos preguntarle a Carlos Eduardo Báez Coronado
+        stage('Static Code Analysis') {
+          steps {
+            echo '------------>Análisis de código estático<------------'
+            sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[papeleria-juan.gutierrez]',
+            sonarName:'ADN-Papeleria[juan.gutierrez]',
+            sonarPathProperties:'./sonar-project.properties')
+          }
+        }
+
+        stage('Build') {
+          steps {
+            echo "------------>Build<------------"
+                //Construir sin tarea test que se ejecutó previamente
+                sh './microservicio/gradlew --b ./microservicio/build.gradle build -x test'
+          }
+        }
     }
 
     post {
-        failure {
-            mail(
-                to: 'juan.gutierrez@ceiba.com.co',
-                body:"Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build",
-                subject: "ERROR CI: ${env.JOB_NAME}"
-            )
-            updateGitlabCommitStatus name: 'IC Jenkins', state: 'failed'
+        always {
+          echo 'This will always run'
         }
         success {
-            updateGitlabCommitStatus name: 'IC Jenkins', state: 'success'
+          echo 'This will run only if successful'
+          junit '**/test-results/test/*.xml'
+        }
+        failure {
+          echo 'This will run only if failed'
+          mail (
+            to: 'juan.gutierrez@ceiba.com.co',
+            subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+            body: "Something is wrong with ${env.BUILD_URL}"
+          )
+        }
+        unstable {
+          echo 'This will run only if the run was marked as unstable'
+        }
+        changed {
+          echo 'This will run only if the state of the Pipeline has changed'
+          echo 'For example, if the Pipeline was previously failing but is now successful'
         }
     }
+
 }

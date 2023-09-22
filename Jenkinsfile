@@ -45,8 +45,8 @@ pipeline{
         stage('Static Code Analysis') {
           steps {
             echo '------------>Análisis de código estático<------------'
-            sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[papeleria-juan.gutierrez]',
-            sonarName:'ADN-Papeleria[juan.gutierrez]',
+            sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:papeleria-juan.gutierrez',
+            sonarName:'ADN-Papeleria(juan.gutierrez)',
             sonarPathProperties:'./sonar-project.properties')
           }
         }

@@ -1,23 +1,24 @@
 jasypt:
-   encryptor:
-      password: ${jasyptpwd:secretkey}
-      algorithm: PBEWithMD5AndDES
-
+  encryptor:
+    password: ${jasyptpwd:secretkey}
+    algorithm: PBEWithMD5AndDES
 server:
-   port: 8083
-   servlet:
-      context-path: /cliente
-      session:
-         timeout: 21600s
+  port: 8083
+  servlet:
+    context-path: /api/v1
+    session:
+      timeout: 21600s
 springdoc:
-   swagger-ui:
-      path: /swagger-ui.html
+  swagger-ui:
+    path: /swagger-ui.html
 spring:
-   datasource:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      type: com.zaxxer.hikari.HikariDataSource
-      jdbcUrl: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;microservicio?autoReconnect&#x3D;true&amp;useSSL&#x3D;false
-      username: root
-      password: ENC(4LrrWgn6Ar0UikHCWbKCzw&#x3D;&#x3D;)
-      hikari:
-         poolName: pool
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    jdbcUrl: jdbc:mysql://localhost:3306/papeleria
+    username: root
+    password: ENC(zqGT78xXZ2ENLJbvqozUEg==)
+    hikari:
+      poolName: pool
+  flyway:
+    enabled: true

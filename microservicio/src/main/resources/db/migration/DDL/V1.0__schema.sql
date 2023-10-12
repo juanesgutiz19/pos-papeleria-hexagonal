@@ -1,4 +1,4 @@
-
+/*
 create table cliente (
  id int(11) not null auto_increment,
  nombre varchar(100) not null,
@@ -50,3 +50,61 @@ ADD CONSTRAINT factura_fk
   REFERENCES factura (id)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+*/
+-- DDL --
+CREATE TABLE categoria
+(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    descripcion VARCHAR(80) NOT NULL
+);
+
+CREATE TABLE articulo
+(
+    codigo VARCHAR(6) PRIMARY KEY,
+    nombre VARCHAR(60) NOT NULL,
+    precio_compra DECIMAL(10, 2) NOT NULL,
+    precio_venta DECIMAL(10, 2) NOT NULL,
+    id_categoria INT NOT NULL,
+    FOREIGN KEY (id_categoria)
+        REFERENCES categoria (id)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+);
+
+CREATE TABLE inventario
+(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_articulo VARCHAR(6) NOT NULL,
+    cantidad_disponible INT NOT NULL,
+    fecha_entrada DATE NOT NULL,
+    FOREIGN KEY (id_articulo)
+        REFERENCES articulo (codigo)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+);
+
+CREATE TABLE venta
+(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fecha TIMESTAMP NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
+    porcentaje_descuento_aplicado_venta DECIMAL(5, 2) NOT NULL
+);
+
+CREATE TABLE detalle_venta
+(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_venta INT NOT NULL,
+    id_articulo VARCHAR(6) NOT NULL,
+    cantidad INT NOT NULL,
+    subtotal DECIMAL(10, 2) NOT NULL,
+    porcentaje_descuento_aplicado_detalle DECIMAL(5, 2) NOT NULL,
+    FOREIGN KEY (id_venta)
+        REFERENCES venta (id)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    FOREIGN KEY (id_articulo)
+        REFERENCES articulo (codigo)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+);

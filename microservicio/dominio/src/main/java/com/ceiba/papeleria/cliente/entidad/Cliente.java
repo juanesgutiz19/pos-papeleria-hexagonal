@@ -2,7 +2,7 @@ package com.ceiba.papeleria.cliente.entidad;
 
 import com.ceiba.papeleria.dominio.ValidadorArgumento;
 
-public class Cliente {
+public final class Cliente {
 
     private Long id;
     private final String nombre;

@@ -5,7 +5,7 @@ import com.ceiba.papeleria.producto.entidad.Producto;
 
 import java.math.BigDecimal;
 
-public class ProductoFacturar {
+public final class ProductoFacturar {
     public static final Double VALOR_IVA = 0.19;
 
     private Long id;

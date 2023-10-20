@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Factura {
+public final class Factura {
 
     public static final double DESCUENTO_CLIENTE_PREFERENCIAL = 0.2;
     public static final double DESCUENTO_CLIENTE_ESPECIAL = 0.1;

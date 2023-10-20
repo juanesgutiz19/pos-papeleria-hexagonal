@@ -13,5 +13,6 @@ public class ArticuloDTO {
     private String nombre;
     private BigDecimal precioCompra;
     private BigDecimal precioVenta;
-    
+
+
 }

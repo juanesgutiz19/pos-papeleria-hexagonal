@@ -1,6 +1,6 @@
 package com.ceiba.papeleria.articulo.controlador;
 
-import com.ceiba.papeleria.articulo.consulta.ManejadorConsultarProductosPorNombre;
+import com.ceiba.papeleria.articulo.consulta.ManejadorConsultarArticulosPorNombre;
 import com.ceiba.papeleria.articulo.modelo.dto.ArticuloDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,15 +15,15 @@ import java.util.List;
 @RequestMapping("/articulos")
 @Tag(name = "Controlador consulta articulos")
 public class ConsultaControladorArticulo {
-    private final ManejadorConsultarProductosPorNombre manejadorConsultarProductosPorNombre;
+    private final ManejadorConsultarArticulosPorNombre manejadorConsultarArticulosPorNombre;
 
-    public ConsultaControladorArticulo(ManejadorConsultarProductosPorNombre manejadorConsultarProductosPorNombre) {
-        this.manejadorConsultarProductosPorNombre = manejadorConsultarProductosPorNombre;
+    public ConsultaControladorArticulo(ManejadorConsultarArticulosPorNombre manejadorConsultarArticulosPorNombre) {
+        this.manejadorConsultarArticulosPorNombre = manejadorConsultarArticulosPorNombre;
     }
 
     @GetMapping
     @Operation(summary = "Obtener articulos por nombre", description = "Metodo utilizado para consultar los articulos dado un nombre")
     public List<ArticuloDTO> obtenerArticulosPorNombre(@RequestParam("nombre") String nombre) {
-        return manejadorConsultarProductosPorNombre.ejecutar(nombre);
+        return manejadorConsultarArticulosPorNombre.ejecutar(nombre);
     }
 }

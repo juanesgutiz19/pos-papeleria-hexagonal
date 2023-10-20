@@ -1,4 +1,4 @@
-/*
+
 create table cliente (
  id int(11) not null auto_increment,
  nombre varchar(100) not null,
@@ -50,7 +50,12 @@ ADD CONSTRAINT factura_fk
   REFERENCES factura (id)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
-*/
+
+
+
+
+
+
 -- DDL --
 CREATE TABLE categoria
 (

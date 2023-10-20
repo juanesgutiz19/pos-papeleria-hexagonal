@@ -8,7 +8,7 @@ import lombok.Getter;
 import java.math.BigDecimal;
 
 @Getter
-public class Articulo {
+public final class Articulo {
 
     private String codigo;
     private String nombre;

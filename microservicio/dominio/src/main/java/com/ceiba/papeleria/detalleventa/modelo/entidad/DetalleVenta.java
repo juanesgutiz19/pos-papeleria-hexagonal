@@ -9,7 +9,7 @@ import lombok.Getter;
 import java.math.BigDecimal;
 
 @Getter
-public class DetalleVenta {
+public final class DetalleVenta {
 
     private Long id;
     private Articulo articulo;
@@ -17,7 +17,7 @@ public class DetalleVenta {
     private BigDecimal subtotal;
     private BigDecimal porcentajeDescuentoAplicadoDetalle;
 
-    public DetalleVenta(Long id, Articulo articulo, Integer cantidad, BigDecimal subtotal, BigDecimal porcentajeDescuentoAplicadoDetalle) {
+    private DetalleVenta(Long id, Articulo articulo, Integer cantidad, BigDecimal subtotal, BigDecimal porcentajeDescuentoAplicadoDetalle) {
         this.id = id;
         this.articulo = articulo;
         this.cantidad = cantidad;
@@ -25,7 +25,7 @@ public class DetalleVenta {
         this.porcentajeDescuentoAplicadoDetalle = porcentajeDescuentoAplicadoDetalle;
     }
 
-    private static DetalleVenta reconstruir(Long id, Articulo articulo, Integer cantidad, BigDecimal subtotal, BigDecimal porcentajeDescuentoAplicadoDetalle) {
+    public static DetalleVenta reconstruir(Long id, Articulo articulo, Integer cantidad, BigDecimal subtotal, BigDecimal porcentajeDescuentoAplicadoDetalle) {
         ValidadorArgumento.validarObligatorio(id, "El id del detalle de la venta es obligatorio");
         ValidadorArgumento.validarObligatorio(articulo, "El artículo asociado al detalle de la venta es obligatorio");
         ValidadorArgumento.validarObligatorio(cantidad, "La cantidad asociada al detalle de la venta es obligatorio");

@@ -6,10 +6,11 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
-public class Venta {
+public final class Venta {
 
     private Long id;
     private List<DetalleVenta> detallesVenta;
@@ -19,7 +20,7 @@ public class Venta {
 
     private Venta(Long id, List<DetalleVenta> detallesVenta, LocalDateTime fecha, BigDecimal total, BigDecimal porcentajeDescuentoAplicadoVentas) {
         this.id = id;
-        this.detallesVenta = detallesVenta;
+        this.detallesVenta = Collections.unmodifiableList(detallesVenta);
         this.fecha = fecha;
         this.total = total;
         this.porcentajeDescuentoAplicadoVentas = porcentajeDescuentoAplicadoVentas;

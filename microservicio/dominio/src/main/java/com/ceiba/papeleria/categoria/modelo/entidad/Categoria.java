@@ -3,9 +3,8 @@ package com.ceiba.papeleria.categoria.modelo.entidad;
 import com.ceiba.papeleria.dominio.ValidadorArgumento;
 import lombok.Getter;
 
-
 @Getter
-public class Categoria {
+public final class Categoria {
     private Long id;
     private String descripcion;
 

@@ -9,7 +9,7 @@ import lombok.Getter;
 import java.time.LocalDate;
 
 @Getter
-public class Inventario {
+public final class Inventario {
 
     private Long id;
     private Articulo articulo;

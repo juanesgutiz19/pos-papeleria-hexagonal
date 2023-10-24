@@ -117,7 +117,6 @@ class FacturaTest {
     @Test
     void facturaSinClientedeberiaLanzarError() {
 
-
         BasePrueba.assertThrows(() -> new FacturaTestDataBuilder().conFacturaPorDefecto()
                         .conCliente(null)
                         .crear(), ExcepcionValorObligatorio.class,

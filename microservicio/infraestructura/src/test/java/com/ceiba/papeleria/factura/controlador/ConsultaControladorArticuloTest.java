@@ -28,7 +28,7 @@ class ConsultaControladorArticuloTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private static String RUTA_ARTICULOS = "/articulos";
+    private static final String RUTA_ARTICULOS = "/articulos";
 
     @Test
     void obtenerArticulosPorNombreConArticulosExistentesDebeRetornarStatusOkYDevolverArticulosCorrectamenteTest() throws Exception {

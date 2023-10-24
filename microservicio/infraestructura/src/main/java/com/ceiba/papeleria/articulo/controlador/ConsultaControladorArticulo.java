@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/articulos")
-@Tag(name = "Controlador consulta articulos")
+@Tag(name = "Controlador consulta artículos")
 public class ConsultaControladorArticulo {
     private final ManejadorConsultarArticulosPorNombre manejadorConsultarArticulosPorNombre;
 
@@ -22,7 +22,7 @@ public class ConsultaControladorArticulo {
     }
 
     @GetMapping
-    @Operation(summary = "Obtener articulos por nombre", description = "Metodo utilizado para consultar los articulos dado un nombre")
+    @Operation(summary = "Obtener articulos por nombre", description = "Método utilizado para consultar los artículos dado un nombre")
     public List<ArticuloDTO> obtenerArticulosPorNombre(@RequestParam("nombre") String nombre) {
         return manejadorConsultarArticulosPorNombre.ejecutar(nombre);
     }

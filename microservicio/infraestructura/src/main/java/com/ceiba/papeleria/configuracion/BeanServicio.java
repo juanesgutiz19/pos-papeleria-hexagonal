@@ -4,6 +4,8 @@ package com.ceiba.papeleria.configuracion;
 import com.ceiba.papeleria.factura.puerto.repositorio.RepositorioFactura;
 import com.ceiba.papeleria.factura.servicio.ServicioAnular;
 import com.ceiba.papeleria.factura.servicio.ServicioFacturar;
+import com.ceiba.papeleria.inventario.puerto.repositorio.RepositorioInventario;
+import com.ceiba.papeleria.inventario.servicio.ServicioActualizarCantidadDisponible;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,7 +22,9 @@ public class BeanServicio {
         return new ServicioAnular(repositorioFactura);
     }
 
-
-	
+    @Bean
+    public ServicioActualizarCantidadDisponible servicioActualizarCantidadDisponible(RepositorioInventario repositorioInventario){
+        return new ServicioActualizarCantidadDisponible(repositorioInventario);
+    }
 
 } 

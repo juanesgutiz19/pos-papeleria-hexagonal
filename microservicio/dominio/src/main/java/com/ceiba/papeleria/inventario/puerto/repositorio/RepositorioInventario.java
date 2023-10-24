@@ -1,6 +1,5 @@
 package com.ceiba.papeleria.inventario.puerto.repositorio;
 
-import com.ceiba.papeleria.factura.modelo.entidad.Factura;
 import com.ceiba.papeleria.inventario.modelo.entidad.Inventario;
 
 public interface RepositorioInventario {

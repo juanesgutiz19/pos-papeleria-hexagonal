@@ -3,11 +3,8 @@ package com.ceiba.papeleria.articulo.modelo.entidad;
 import com.ceiba.papeleria.categoria.modelo.entidad.Categoria;
 import com.ceiba.papeleria.dominio.ValidadorArgumento;
 
-import lombok.Getter;
-
 import java.math.BigDecimal;
 
-@Getter
 public final class Articulo {
 
     private String codigo;
@@ -22,6 +19,26 @@ public final class Articulo {
         this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;
         this.categoria = categoria;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public BigDecimal getPrecioCompra() {
+        return precioCompra;
+    }
+
+    public BigDecimal getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
     }
 
     public static Articulo reconstruir(String codigo, String nombre, BigDecimal precioCompra, BigDecimal precioVenta, Categoria categoria) {

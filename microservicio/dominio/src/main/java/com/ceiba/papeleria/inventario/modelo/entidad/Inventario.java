@@ -8,7 +8,6 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 
-@Getter
 public final class Inventario {
 
     private Long id;
@@ -21,6 +20,22 @@ public final class Inventario {
         this.articulo = articulo;
         this.cantidadDisponible = cantidadDisponible;
         this.fechaEntrada = fechaEntrada;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    public Integer getCantidadDisponible() {
+        return cantidadDisponible;
+    }
+
+    public LocalDate getFechaEntrada() {
+        return fechaEntrada;
     }
 
     public void actualizarCantidadDisponible(Integer cantidadAAgregar) {

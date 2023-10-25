@@ -1,7 +1,6 @@
-package com.ceiba.papeleria.factura.controlador;
+package com.ceiba.papeleria.articulo.controlador;
 
 import com.ceiba.papeleria.ApplicationMock;
-import com.ceiba.papeleria.articulo.controlador.ConsultaControladorArticulo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

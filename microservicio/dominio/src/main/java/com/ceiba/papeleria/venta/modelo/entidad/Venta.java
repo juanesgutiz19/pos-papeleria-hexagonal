@@ -2,14 +2,12 @@ package com.ceiba.papeleria.venta.modelo.entidad;
 
 import com.ceiba.papeleria.detalleventa.modelo.entidad.DetalleVenta;
 import com.ceiba.papeleria.dominio.ValidadorArgumento;
-import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
-@Getter
 public final class Venta {
 
     private Long id;
@@ -24,6 +22,26 @@ public final class Venta {
         this.fecha = fecha;
         this.total = total;
         this.porcentajeDescuentoAplicadoVentas = porcentajeDescuentoAplicadoVentas;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public List<DetalleVenta> getDetallesVenta() {
+        return detallesVenta;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public BigDecimal getPorcentajeDescuentoAplicadoVentas() {
+        return porcentajeDescuentoAplicadoVentas;
     }
 
     public static Venta reconstruir(Long id, List<DetalleVenta> detallesVenta, LocalDateTime fecha, BigDecimal total, BigDecimal porcentajeDescuentoAplicadoVentas) {

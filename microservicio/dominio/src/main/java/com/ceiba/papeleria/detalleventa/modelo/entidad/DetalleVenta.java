@@ -2,13 +2,9 @@ package com.ceiba.papeleria.detalleventa.modelo.entidad;
 
 import com.ceiba.papeleria.articulo.modelo.entidad.Articulo;
 import com.ceiba.papeleria.dominio.ValidadorArgumento;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
 
 import java.math.BigDecimal;
 
-@Getter
 public final class DetalleVenta {
 
     private Long id;
@@ -23,6 +19,26 @@ public final class DetalleVenta {
         this.cantidad = cantidad;
         this.subtotal = subtotal;
         this.porcentajeDescuentoAplicadoDetalle = porcentajeDescuentoAplicadoDetalle;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public BigDecimal getSubtotal() {
+        return subtotal;
+    }
+
+    public BigDecimal getPorcentajeDescuentoAplicadoDetalle() {
+        return porcentajeDescuentoAplicadoDetalle;
     }
 
     public static DetalleVenta reconstruir(Long id, Articulo articulo, Integer cantidad, BigDecimal subtotal, BigDecimal porcentajeDescuentoAplicadoDetalle) {

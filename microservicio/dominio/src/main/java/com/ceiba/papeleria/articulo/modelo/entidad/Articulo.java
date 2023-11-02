@@ -51,7 +51,7 @@ public final class Articulo {
         if (precioVenta.compareTo(BigDecimal.ZERO) <= 0 || precioCompra.compareTo(BigDecimal.ZERO) <= 0) {
             throw new ExcepcionValorInvalido("Ni el precio de compra ni el precio de venta pueden ser menores a cero");
         }
-        if (!(precioVenta.compareTo(precioCompra) > 0)) {
+        if (precioVenta.compareTo(precioCompra) <= 0) {
             throw new ExcepcionValorInvalido("El precio de venta debe ser mayor al precio de compra");
         }
         return new Articulo(codigo, nombre, precioCompra, precioVenta, categoria);

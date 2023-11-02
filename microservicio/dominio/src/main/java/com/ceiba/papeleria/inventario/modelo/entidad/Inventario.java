@@ -45,8 +45,8 @@ public final class Inventario {
         this.cantidadDisponible = this.getCantidadDisponible() + cantidadAAgregar;
     }
 
-    public static void validarCantidadDisponible(Integer cantidadDisponible) {
-        if (cantidadDisponible <= 0) {
+    private static void validarCantidadDisponible(Integer cantidadDisponible) {
+        if (cantidadDisponible < 0) {
             throw new ExcepcionValorInvalido("La cantidad disponible no puede ser menor a cero");
         }
     }

@@ -49,7 +49,7 @@ public final class Articulo {
         ValidadorArgumento.validarObligatorio(precioVenta, "El precio de venta del artículo es obligatorio");
         ValidadorArgumento.validarObligatorio(categoria, "La categoria del artículo es obligatoria");
         if (precioVenta.compareTo(BigDecimal.ZERO) <= 0 || precioCompra.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new ExcepcionValorInvalido("Ni el precio de compra ni el precio de venta pueden ser menores a cero");
+            throw new ExcepcionValorInvalido("Ni el precio de compra ni el precio de venta pueden ser menores o iguales a cero");
         }
         if (precioVenta.compareTo(precioCompra) <= 0) {
             throw new ExcepcionValorInvalido("El precio de venta debe ser mayor al precio de compra");

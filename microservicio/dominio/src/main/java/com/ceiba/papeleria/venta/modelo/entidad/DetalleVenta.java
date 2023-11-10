@@ -1,7 +1,9 @@
-package com.ceiba.papeleria.detalleventa.modelo.entidad;
+package com.ceiba.papeleria.venta.modelo.entidad;
 
 import com.ceiba.papeleria.articulo.modelo.entidad.Articulo;
 import com.ceiba.papeleria.dominio.ValidadorArgumento;
+import com.ceiba.papeleria.factura.modelo.entidad.ProductoFacturar;
+import com.ceiba.papeleria.producto.entidad.Producto;
 
 import java.math.BigDecimal;
 
@@ -15,6 +17,13 @@ public final class DetalleVenta {
 
     private DetalleVenta(Long id, Articulo articulo, Integer cantidad, BigDecimal subtotal, BigDecimal porcentajeDescuentoAplicadoDetalle) {
         this.id = id;
+        this.articulo = articulo;
+        this.cantidad = cantidad;
+        this.subtotal = subtotal;
+        this.porcentajeDescuentoAplicadoDetalle = porcentajeDescuentoAplicadoDetalle;
+    }
+
+    public DetalleVenta(Articulo articulo, Integer cantidad, BigDecimal subtotal, BigDecimal porcentajeDescuentoAplicadoDetalle) {
         this.articulo = articulo;
         this.cantidad = cantidad;
         this.subtotal = subtotal;
@@ -39,6 +48,14 @@ public final class DetalleVenta {
 
     public BigDecimal getPorcentajeDescuentoAplicadoDetalle() {
         return porcentajeDescuentoAplicadoDetalle;
+    }
+
+    public static DetalleVenta crear(Integer cantidad, Articulo articulo) {
+        ValidadorArgumento.validarObligatorio(cantidad, "La cantidad es requerida");
+        ValidadorArgumento.validarObligatorio(articulo, "El artículo es requerido");
+        BigDecimal precioVentaArticulo = articulo.getPrecioVenta();
+
+        return new DetalleVenta(articulo, cantidad, new BigDecimal(cantidad).multiply(precioVentaArticulo), BigDecimal.ZERO);
     }
 
     public static DetalleVenta reconstruir(Long id, Articulo articulo, Integer cantidad, BigDecimal subtotal, BigDecimal porcentajeDescuentoAplicadoDetalle) {

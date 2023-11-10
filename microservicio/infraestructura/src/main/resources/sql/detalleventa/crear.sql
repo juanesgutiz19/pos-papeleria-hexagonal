@@ -1,0 +1,2 @@
+insert into detalle_venta(id_venta, id_articulo, cantidad, subtotal, porcentaje_descuento_aplicado_detalle)
+values (:id_venta, :id_articulo, :cantidad, :subtotal, :porcentaje_descuento_aplicado_detalle)

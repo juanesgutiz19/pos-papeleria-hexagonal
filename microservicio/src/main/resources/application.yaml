@@ -1,6 +1,6 @@
 jasypt:
   encryptor:
-    password: ${jasyptpwd:secretkey}
+    password: secretkey
     algorithm: PBEWithMD5AndDES
 server:
   port: 8083

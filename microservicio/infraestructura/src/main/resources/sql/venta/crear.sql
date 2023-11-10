@@ -1,0 +1,1 @@
+insert into venta(fecha, total, porcentaje_descuento_aplicado_venta) values (:fecha, :total, :porcentaje_descuento_aplicado_venta)

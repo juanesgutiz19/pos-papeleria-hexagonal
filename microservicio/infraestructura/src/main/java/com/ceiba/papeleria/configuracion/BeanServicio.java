@@ -6,6 +6,8 @@ import com.ceiba.papeleria.factura.servicio.ServicioAnular;
 import com.ceiba.papeleria.factura.servicio.ServicioFacturar;
 import com.ceiba.papeleria.inventario.puerto.repositorio.RepositorioInventario;
 import com.ceiba.papeleria.inventario.servicio.ServicioActualizarCantidadDisponible;
+import com.ceiba.papeleria.venta.puerto.repositorio.RepositorioVenta;
+import com.ceiba.papeleria.venta.servicio.ServicioRegistrar;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,8 +25,13 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioActualizarCantidadDisponible servicioActualizarCantidadDisponible(RepositorioInventario repositorioInventario){
+    public ServicioActualizarCantidadDisponible servicioActualizarCantidadDisponible(RepositorioInventario repositorioInventario) {
         return new ServicioActualizarCantidadDisponible(repositorioInventario);
+    }
+
+    @Bean
+    public ServicioRegistrar servicioRegistrar(RepositorioVenta repositorioVenta) {
+        return new ServicioRegistrar(repositorioVenta);
     }
 
 } 

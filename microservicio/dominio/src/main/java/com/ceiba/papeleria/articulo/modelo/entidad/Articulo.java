@@ -42,19 +42,18 @@ public final class Articulo {
         return categoria;
     }
 
-    public static Articulo reconstruir(String codigo, String nombre, BigDecimal precioCompra, BigDecimal precioVenta, Categoria categoria) {
+    public static Articulo reconstruir(String codigo, String nombre, BigDecimal precioCompra, BigDecimal precioVenta) {
         ValidadorArgumento.validarObligatorio(codigo, "El código del artículo es obligatorio");
         ValidadorArgumento.validarObligatorio(nombre, "El nombre del artículo es obligatorio");
         ValidadorArgumento.validarObligatorio(precioCompra, "El precio de compra del artículo es obligatorio");
         ValidadorArgumento.validarObligatorio(precioVenta, "El precio de venta del artículo es obligatorio");
-        ValidadorArgumento.validarObligatorio(categoria, "La categoria del artículo es obligatoria");
         if (precioVenta.compareTo(BigDecimal.ZERO) <= 0 || precioCompra.compareTo(BigDecimal.ZERO) <= 0) {
             throw new ExcepcionValorInvalido("Ni el precio de compra ni el precio de venta pueden ser menores o iguales a cero");
         }
         if (precioVenta.compareTo(precioCompra) <= 0) {
             throw new ExcepcionValorInvalido("El precio de venta debe ser mayor al precio de compra");
         }
-        return new Articulo(codigo, nombre, precioCompra, precioVenta, categoria);
+        return new Articulo(codigo, nombre, precioCompra, precioVenta, null);
     }
 
 }

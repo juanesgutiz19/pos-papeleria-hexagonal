@@ -1,4 +1,4 @@
-package com.ceiba.papeleria.factura.comando;
+package com.ceiba.papeleria.venta.comando;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ComandoProductoFacturar {
-    private Long idProducto;
+public class ComandoDetalleVentaRegistrar {
+    private String idArticulo;
     private Integer cantidad;
 }

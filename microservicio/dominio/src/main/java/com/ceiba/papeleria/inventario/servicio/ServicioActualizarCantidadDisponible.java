@@ -6,6 +6,8 @@ import com.ceiba.papeleria.inventario.puerto.repositorio.RepositorioInventario;
 
 public class ServicioActualizarCantidadDisponible {
 
+    private static final String MENSAJE_REGISTRO_INVENTARIO_NO_EXISTE = "No existe registro de inventario asociado al código del artículo enviado";
+
     private final RepositorioInventario repositorioInventario;
 
     public ServicioActualizarCantidadDisponible(RepositorioInventario repositorioInventario) {
@@ -13,7 +15,7 @@ public class ServicioActualizarCantidadDisponible {
     }
 
     public void ejecutar(Inventario inventario, Integer cantidadAAgregar) {
-        ValidadorArgumento.validarObligatorio(inventario, "No existe registro de inventario asociado al código del artículo enviado");
+        ValidadorArgumento.validarObligatorio(inventario, MENSAJE_REGISTRO_INVENTARIO_NO_EXISTE);
         inventario.actualizarCantidadDisponible(cantidadAAgregar);
         repositorioInventario.actualizarCantidadDisponibleArticulo(inventario);
     }

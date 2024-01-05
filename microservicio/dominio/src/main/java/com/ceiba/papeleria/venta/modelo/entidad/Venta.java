@@ -10,6 +10,13 @@ import java.util.List;
 
 public final class Venta {
 
+    private static final String ID_VENTA_OBLIGATORIO = "El id de la venta es obligatorio";
+    private static final String FECHA_VENTA_OBLIGATORIA = "La fecha de la venta es obligatoria";
+    private static final String TOTAL_VENTA_OBLIGATORIO = "El total de la venta es obligatorio";
+    private static final String PORCENTAJE_DESCUENTO_OBLIGATORIO = "El porcentaje de descuento aplicado de la venta es obligatorio";
+    private static final String DETALLES_VENTA_OBLIGATORIOS = "Los detalles de la venta son obligatorios";
+    private static final String DETALLES_VENTA_NO_VACIOS = "Los detalles de la venta no pueden estar vacíos";
+
     private Long id;
     private List<DetalleVenta> detallesVenta;
     private LocalDate fecha;
@@ -32,8 +39,8 @@ public final class Venta {
     }
 
     public static Venta crear(SolicitudRegistrar solicitudRegistrar) {
-        ValidadorArgumento.validarObligatorio(solicitudRegistrar.getFecha(), "La fecha es requerida para el registro de una venta");
-        ValidadorArgumento.validarNoVacio(solicitudRegistrar.getDetallesVenta(), "No se puede registrar una venta sin detalles de venta");
+        ValidadorArgumento.validarObligatorio(solicitudRegistrar.getFecha(), FECHA_VENTA_OBLIGATORIA);
+        ValidadorArgumento.validarNoVacio(solicitudRegistrar.getDetallesVenta(), DETALLES_VENTA_OBLIGATORIOS);
         return new Venta(solicitudRegistrar.getFecha(), solicitudRegistrar.getDetallesVenta());
     }
 
@@ -64,13 +71,12 @@ public final class Venta {
     }
 
     public static Venta reconstruir(Long id, List<DetalleVenta> detallesVenta, LocalDate fecha, BigDecimal total, BigDecimal porcentajeDescuentoAplicadoVentas) {
-        ValidadorArgumento.validarObligatorio(id, "El id de la venta es obligatorio");
-        ValidadorArgumento.validarObligatorio(fecha, "La fecha de la venta es obligatoria");
-        ValidadorArgumento.validarObligatorio(total, "El total de la venta es obligatorio");
-        ValidadorArgumento.validarObligatorio(porcentajeDescuentoAplicadoVentas, "El porcentaje de descuento aplicado de la venta es obligatorio");
-        ValidadorArgumento.validarObligatorio(detallesVenta, "Los detalles de la venta son obligatorios");
-        ValidadorArgumento.validarNoVacio(detallesVenta, "Los detalles de la venta no pueden estar vacíos");
+        ValidadorArgumento.validarObligatorio(id, ID_VENTA_OBLIGATORIO);
+        ValidadorArgumento.validarObligatorio(fecha, FECHA_VENTA_OBLIGATORIA);
+        ValidadorArgumento.validarObligatorio(total, TOTAL_VENTA_OBLIGATORIO);
+        ValidadorArgumento.validarObligatorio(porcentajeDescuentoAplicadoVentas, PORCENTAJE_DESCUENTO_OBLIGATORIO);
+        ValidadorArgumento.validarObligatorio(detallesVenta, DETALLES_VENTA_OBLIGATORIOS);
+        ValidadorArgumento.validarNoVacio(detallesVenta, DETALLES_VENTA_NO_VACIOS);
         return new Venta(id, detallesVenta, fecha, total, porcentajeDescuentoAplicadoVentas);
     }
-
 }

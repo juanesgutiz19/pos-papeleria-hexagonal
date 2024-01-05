@@ -2,12 +2,16 @@ package com.ceiba.papeleria.venta.modelo.entidad;
 
 import com.ceiba.papeleria.articulo.modelo.entidad.Articulo;
 import com.ceiba.papeleria.dominio.ValidadorArgumento;
-import com.ceiba.papeleria.factura.modelo.entidad.ProductoFacturar;
-import com.ceiba.papeleria.producto.entidad.Producto;
 
 import java.math.BigDecimal;
 
 public final class DetalleVenta {
+
+    private static final String ID_DETALLE_VENTA_OBLIGATORIO = "El id del detalle de la venta es obligatorio";
+    private static final String ARTICULO_DETALLE_VENTA_OBLIGATORIO = "El artículo asociado al detalle de la venta es obligatorio";
+    private static final String CANTIDAD_DETALLE_VENTA_OBLIGATORIO = "La cantidad asociada al detalle de la venta es obligatoria";
+    private static final String SUBTOTAL_DETALLE_VENTA_OBLIGATORIO = "El subtotal del detalle de la venta es obligatorio";
+    private static final String PORCENTAJE_DESCUENTO_DETALLE_VENTA_OBLIGATORIO = "El porcentaje de descuento aplicado del detalle de la venta es obligatorio";
 
     private Long id;
     private Articulo articulo;
@@ -51,20 +55,19 @@ public final class DetalleVenta {
     }
 
     public static DetalleVenta crear(Integer cantidad, Articulo articulo) {
-        ValidadorArgumento.validarObligatorio(cantidad, "La cantidad es requerida");
-        ValidadorArgumento.validarObligatorio(articulo, "El artículo es requerido");
+        ValidadorArgumento.validarObligatorio(cantidad, CANTIDAD_DETALLE_VENTA_OBLIGATORIO);
+        ValidadorArgumento.validarObligatorio(articulo, ARTICULO_DETALLE_VENTA_OBLIGATORIO);
         BigDecimal precioVentaArticulo = articulo.getPrecioVenta();
 
         return new DetalleVenta(articulo, cantidad, new BigDecimal(cantidad).multiply(precioVentaArticulo), BigDecimal.ZERO);
     }
 
     public static DetalleVenta reconstruir(Long id, Articulo articulo, Integer cantidad, BigDecimal subtotal, BigDecimal porcentajeDescuentoAplicadoDetalle) {
-        ValidadorArgumento.validarObligatorio(id, "El id del detalle de la venta es obligatorio");
-        ValidadorArgumento.validarObligatorio(articulo, "El artículo asociado al detalle de la venta es obligatorio");
-        ValidadorArgumento.validarObligatorio(cantidad, "La cantidad asociada al detalle de la venta es obligatorio");
-        ValidadorArgumento.validarObligatorio(subtotal, "El subtotal del detalle de la venta es obligatorio");
-        ValidadorArgumento.validarObligatorio(porcentajeDescuentoAplicadoDetalle, "El porcentaje de cescuento aplicado del detalle de la venta es obligatorio");
+        ValidadorArgumento.validarObligatorio(id, ID_DETALLE_VENTA_OBLIGATORIO);
+        ValidadorArgumento.validarObligatorio(articulo, ARTICULO_DETALLE_VENTA_OBLIGATORIO);
+        ValidadorArgumento.validarObligatorio(cantidad, CANTIDAD_DETALLE_VENTA_OBLIGATORIO);
+        ValidadorArgumento.validarObligatorio(subtotal, SUBTOTAL_DETALLE_VENTA_OBLIGATORIO);
+        ValidadorArgumento.validarObligatorio(porcentajeDescuentoAplicadoDetalle, PORCENTAJE_DESCUENTO_DETALLE_VENTA_OBLIGATORIO);
         return new DetalleVenta(id, articulo, cantidad, subtotal, porcentajeDescuentoAplicadoDetalle);
     }
-
 }

@@ -8,6 +8,7 @@ import java.util.List;
 public interface RepositorioDetalleVenta {
 
     void guardarPorVenta(Venta venta, Long idVenta);
+
     List<DetalleVenta> obtenerPorVenta(Long idVenta);
 
     void guardar(DetalleVenta detalleVenta, Long idVenta);

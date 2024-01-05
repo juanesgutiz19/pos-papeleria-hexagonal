@@ -1,7 +1,7 @@
-package com.ceiba.papeleria.articulo;
+package com.ceiba.papeleria.articulo.testdatabuilder;
 
 import com.ceiba.papeleria.articulo.modelo.entidad.Articulo;
-import com.ceiba.papeleria.categoria.CategoriaTestDataBuilder;
+import com.ceiba.papeleria.categoria.testdatabuilder.CategoriaTestDataBuilder;
 import com.ceiba.papeleria.categoria.modelo.entidad.Categoria;
 
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package com.ceiba.papeleria.categoria;
+package com.ceiba.papeleria.categoria.testdatabuilder;
 
 import com.ceiba.papeleria.categoria.modelo.entidad.Categoria;
 

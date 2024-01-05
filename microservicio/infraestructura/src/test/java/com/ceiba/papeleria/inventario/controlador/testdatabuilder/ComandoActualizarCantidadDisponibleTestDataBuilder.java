@@ -1,7 +1,5 @@
-package com.ceiba.papeleria.inventario.controlador;
+package com.ceiba.papeleria.inventario.controlador.testdatabuilder;
 
-import com.ceiba.papeleria.cliente.entidad.Cliente;
-import com.ceiba.papeleria.cliente.entidad.TipoCliente;
 import com.ceiba.papeleria.inventario.comando.ComandoActualizarCantidadDisponible;
 
 public class ComandoActualizarCantidadDisponibleTestDataBuilder {

@@ -1,6 +1,6 @@
-package com.ceiba.papeleria.inventario;
+package com.ceiba.papeleria.inventario.testdatabuilder;
 
-import com.ceiba.papeleria.articulo.ArticuloTestDataBuilder;
+import com.ceiba.papeleria.articulo.testdatabuilder.ArticuloTestDataBuilder;
 import com.ceiba.papeleria.articulo.modelo.entidad.Articulo;
 import com.ceiba.papeleria.inventario.modelo.entidad.Inventario;
 

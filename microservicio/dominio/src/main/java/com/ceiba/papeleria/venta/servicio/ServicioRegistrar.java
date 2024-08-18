@@ -15,5 +15,7 @@ public class ServicioRegistrar {
     public Long ejecutar(SolicitudRegistrar solicitudRegistrar){
         Venta venta = Venta.crear(solicitudRegistrar);
         return repositorioVenta.guardar(venta);
+        // Lógica para restar en los inventarios
+
     }
 }

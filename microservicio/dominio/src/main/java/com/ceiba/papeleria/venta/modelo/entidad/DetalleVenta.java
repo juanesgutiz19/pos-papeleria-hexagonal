@@ -1,9 +1,10 @@
 package com.ceiba.papeleria.venta.modelo.entidad;
 
 import com.ceiba.papeleria.articulo.modelo.entidad.Articulo;
-import com.ceiba.papeleria.dominio.ValidadorArgumento;
 
 import java.math.BigDecimal;
+
+import static com.ceiba.papeleria.dominio.ValidadorArgumento.validarObligatorio;
 
 public final class DetalleVenta {
 
@@ -55,19 +56,20 @@ public final class DetalleVenta {
     }
 
     public static DetalleVenta crear(Integer cantidad, Articulo articulo) {
-        ValidadorArgumento.validarObligatorio(cantidad, CANTIDAD_DETALLE_VENTA_OBLIGATORIO);
-        ValidadorArgumento.validarObligatorio(articulo, ARTICULO_DETALLE_VENTA_OBLIGATORIO);
+        validarObligatorio(cantidad, CANTIDAD_DETALLE_VENTA_OBLIGATORIO);
+        validarObligatorio(articulo, ARTICULO_DETALLE_VENTA_OBLIGATORIO);
         BigDecimal precioVentaArticulo = articulo.getPrecioVenta();
 
         return new DetalleVenta(articulo, cantidad, new BigDecimal(cantidad).multiply(precioVentaArticulo), BigDecimal.ZERO);
     }
 
     public static DetalleVenta reconstruir(Long id, Articulo articulo, Integer cantidad, BigDecimal subtotal, BigDecimal porcentajeDescuentoAplicadoDetalle) {
-        ValidadorArgumento.validarObligatorio(id, ID_DETALLE_VENTA_OBLIGATORIO);
-        ValidadorArgumento.validarObligatorio(articulo, ARTICULO_DETALLE_VENTA_OBLIGATORIO);
-        ValidadorArgumento.validarObligatorio(cantidad, CANTIDAD_DETALLE_VENTA_OBLIGATORIO);
-        ValidadorArgumento.validarObligatorio(subtotal, SUBTOTAL_DETALLE_VENTA_OBLIGATORIO);
-        ValidadorArgumento.validarObligatorio(porcentajeDescuentoAplicadoDetalle, PORCENTAJE_DESCUENTO_DETALLE_VENTA_OBLIGATORIO);
+        validarObligatorio(id, ID_DETALLE_VENTA_OBLIGATORIO);
+        validarObligatorio(articulo, ARTICULO_DETALLE_VENTA_OBLIGATORIO);
+        validarObligatorio(cantidad, CANTIDAD_DETALLE_VENTA_OBLIGATORIO);
+        validarObligatorio(subtotal, SUBTOTAL_DETALLE_VENTA_OBLIGATORIO);
+        validarObligatorio(porcentajeDescuentoAplicadoDetalle, PORCENTAJE_DESCUENTO_DETALLE_VENTA_OBLIGATORIO);
+
         return new DetalleVenta(id, articulo, cantidad, subtotal, porcentajeDescuentoAplicadoDetalle);
     }
 }
